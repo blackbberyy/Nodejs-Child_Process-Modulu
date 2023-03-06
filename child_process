@@ -1,0 +1,58 @@
+CHİLD PROCESS MODÜLÜ
+child_process:
+Node.js, child_process modülü aracılığıyla yeni işlemler oluşturabilir ve bu işlemlerle etkileşime geçebilirsiniz. Bu modül, spawn(), exec(), execFile() ve fork() gibi yöntemlerle yeni işlemler oluşturmanıza izin verir.
+const { spawn } = require('child_process');
+const child = spawn('ls', ['-lh', '/usr']);
+child.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`);
+});
+child.stderr.on('data', (data) => {
+  console.error(`stderr: ${data}`);
+});
+child.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});
+Bu örnekte, spawn() yöntemi kullanılarak "ls" komutu çalıştırılır ve /usr dizinindeki dosyaların listesi alınır. stdout ve stderr olayları dinlenerek çıktıları işlenir ve child process'in çıkış kodu yazdırılır.
+
+const{spawn,exec}=require('child_process')
+const myEcho=spawn('cmd.exe' , ['c' ,
+'echo Merhaba Dünya'
+myEcho.stdout.on('data' , (data) => {
+console.log('d' , data.toString())
+]) //spawn yumurtlamak anlamında exec ise birleştirmek
+cmd komutundaki gibi yazı yazdırmak istiyor console.log olmadan spawn ile yazdırabildi//
+
+other.js dosyası oluşturup içine hello from other yazdı console.log ile
+const otherJs =exec('node other.js')
+otherjs.stdout.on('data' , (data) => {
+console.log('other', data)
+})  =other hello from other //başka dosya içerisindeki yazıyı oraya gitmeden kendi dosyamız içinde yazmamızı sağladı exec stdout. otherjs içerisindeki dataları stdout ile çıktı haline getiriyor ve önüne de 'data' yazısını ekliyor//
+
+kendini desktopa locate et ve sonra dir komutunu çalıştır
+const desktop=exec('cd C:\\Users\\pc\\Desktop && dir')
+desktop.stdout.on('data' (data) => {
+console.log('d' (data))
+}) = //bilgisayara locate olduktan sonra directoryi verebildik exec ile birleşme
+'data' çıktısı geldiğinde (data) ver
+
+const notePad=exec('cd C:\\Program Files\\Notepad++ && start Notepad++') =notepad uyg açmayı sağlıyor
+
+verdiğimiz locate nin altında fromnodejs isimli klasör yapıyoruz
+ve bunu cmd ile pathini yazıp klasörü görüntüleyebiliriz
+const fnodejs=exec('cd C:\\Users\\pc\\Desktop && mkdir fromnodejs')
+desktop.stdout.on('data' (data) => {
+console.log('d' , data) dataları çıktı olarak konsola ver
+
+bilgisayarın içerisindeki klasörlerden kaçıncı argümanı istediğimizi belirtmek
+console.log('test' , 'cd C:\\Users\\pc\\Desktop\\nodejs egitim\\${process.argv[2] && node ${process.argv[3].js')
+console.log(process.argv)
+terminale index.js path index.js yazarak bize verdiği path den cmd ile görüntülemek
+
+istediğimiz argümanların datalarını görmek
+const executeOtherJsApp=exec('cd C:\\Users\\pc\\Desktop\\nodejs egitim\\${process.argv[2] && node ${process.argv[3].js')
+executeOtherJsApp.stdout.on('data' (data) => {
+console.log('otherProject', data)
+}) =argümanların bilgileri
+
+
+
